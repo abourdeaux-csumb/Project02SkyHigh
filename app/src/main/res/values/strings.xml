@@ -1,3 +1,17 @@
 <resources>
-    <string name="app_name">Project02SkyHigh</string>
+    <string name="app_name">Sky High</string>
+    <string name="mainExerciseHint">Enter Exercise</string>
+    <string name="mainWeightHint">Enter Weight</string>
+    <string name="mainRepsHint">Enter Reps</string>
+    <string name="mainSubmitButton">Submit</string>
+    <string name="loginPasswordHint">Enter Password</string>
+    <string name="loginUsernameHint">Enter Username</string>
+    <string name="loginLoginButton">Login</string>
+    <string name="mainCreateAccountButton">Create an account</string>
+    <string name="loginInvalidCredentials">Invalid credentials</string>
+    <string name="landingFlightsButton">Flights</string>
+    <string name="landingBookedFlightsButton">Booked Flights</string>
+    <string name="landingAdminButton">Admin</string>
+    <string name="landingCancelFlightsButton">Cancel Flights</string>
+    <string name="landingSignOutButton">Sign Out</string>
 </resources>

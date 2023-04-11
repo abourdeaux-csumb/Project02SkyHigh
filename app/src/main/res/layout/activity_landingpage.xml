@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@color/mediumBlue">
+
+
+    <TextView
+        android:id="@+id/landingSkyHighHeader"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:fadeScrollbars="true"
+        android:scrollbars = "vertical"
+        android:text="@string/app_name"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:background="@color/lighterBlue"/>
+
+    <Button
+        android:id="@+id/landingFlightsButton"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="38dp"
+        android:gravity="center"
+        android:text="@string/landingFlightsButton"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/landingSkyHighHeader"
+        app:backgroundTint="@color/orange"/>
+
+    <Button
+        android:id="@+id/landingBookedFlightsButton"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="18dp"
+        android:gravity="center"
+        android:text="@string/landingBookedFlightsButton"
+        android:textSize="18sp"
+        app:backgroundTint="@color/orange"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/landingFlightsButton" />
+
+    <Button
+        android:id="@+id/landingCancelFlightsButton"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="18dp"
+        android:gravity="center"
+        android:text="@string/landingCancelFlightsButton"
+        android:textSize="18sp"
+        app:backgroundTint="@color/orange"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/landingBookedFlightsButton" />
+
+    <Button
+        android:id="@+id/landingAdminButton"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="18dp"
+        android:gravity="center"
+        android:text="@string/landingAdminButton"
+        android:textSize="20sp"
+        app:backgroundTint="@color/orange"
+        android:visibility="invisible"
+        tools:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/landingCancelFlightsButton" />
+    <Button
+        android:id="@+id/landingSignOutButton"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="18dp"
+        android:gravity="center"
+        android:text="@string/landingSignOutButton"
+        android:textSize="20sp"
+        app:backgroundTint="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/landingAdminButton" />
+</androidx.constraintlayout.widget.ConstraintLayout>
