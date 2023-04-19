@@ -50,4 +50,10 @@ public class User {
         this.mIsAdmin = mIsAdmin;
     }
 
+
+    @Override
+    public String toString() {
+        return "Username: " + mUsername + "\n" +
+                "User Type: " + (mIsAdmin ? "Admin" : "Standard");
+    }
 }
