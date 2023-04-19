@@ -12,6 +12,27 @@
         android:theme="@style/Theme.Project02SkyHigh"
         tools:targetApi="31">
         <activity
+            android:name=".AdminManageUsersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminAddFlightActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminManageFlightsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminMenuActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ManageBookedFlightsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BookFlightActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SignUpActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
