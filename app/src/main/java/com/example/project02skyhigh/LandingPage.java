@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
 import com.example.project02skyhigh.DB.AppDatabase;
+import com.example.project02skyhigh.DB.FlightRepository;
 import com.example.project02skyhigh.DB.UserDAO;
 import com.example.project02skyhigh.databinding.ActivityLandingpageBinding;
 
@@ -20,7 +21,6 @@ public class LandingPage extends AppCompatActivity {
     TextView mLandingHeader;
     Button mLandingFlightsButton;
     Button mLandingBookedFlightsButton;
-    Button mLandingCancelFlightsButton;
     Button mLandingAdminButton;
     Button mLandingSignOutButton;
     ActivityLandingpageBinding mLandingPageBinding;
@@ -33,12 +33,26 @@ public class LandingPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         mLandingPageBinding = ActivityLandingpageBinding.inflate(getLayoutInflater());
         View view = mLandingPageBinding.getRoot();
-
         setContentView(view);
+        wireUpDisplay();
+        FlightRepository.initialize(this);
+    }
 
+    private void wireUpDisplay() {
+        mLandingHeader = mLandingPageBinding.landingSkyHighHeader;
+        mLandingFlightsButton = mLandingPageBinding.landingFlightsButton;
+        mLandingBookedFlightsButton = mLandingPageBinding.landingBookedFlightsButton;
+        mLandingAdminButton = mLandingPageBinding.landingAdminButton;
+        mLandingSignOutButton = mLandingPageBinding.landingSignOutButton;
+        evaluateUserPermissions();
+        mLandingHeader.setText("Welcome, " + mUser.getUsername());
+        setButtonOnClickListeners();
+    }
+
+
+    private void evaluateUserPermissions() {
         SharedPreferences sharedPref = getSharedPreferences("Logins", Context.MODE_PRIVATE);
         int userId = sharedPref.getInt("Login", -1);
         if (userId == -1) {
@@ -51,18 +65,12 @@ public class LandingPage extends AppCompatActivity {
                 .getUserDAO();
 
         mUser = mUserDAO.getUserWithId(userId);
-
-        mLandingHeader = mLandingPageBinding.landingSkyHighHeader;
-        mLandingHeader.setText("Welcome, " + mUser.getUsername());
-        mLandingFlightsButton = mLandingPageBinding.landingFlightsButton;
-        mLandingBookedFlightsButton = mLandingPageBinding.landingBookedFlightsButton;
-        mLandingCancelFlightsButton = mLandingPageBinding.landingCancelFlightsButton;
-        mLandingAdminButton = mLandingPageBinding.landingAdminButton;
         if(mUser.getIsAdmin()) {
             mLandingAdminButton.setVisibility(View.VISIBLE);
         }
-        mLandingSignOutButton = mLandingPageBinding.landingSignOutButton;
+    }
 
+    private void setButtonOnClickListeners() {
         mLandingSignOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -71,6 +79,30 @@ public class LandingPage extends AppCompatActivity {
                 editor.remove("Login");
                 editor.commit();
                 Intent intent = MainActivity.getIntent(getApplicationContext());
+                startActivity(intent);
+            }
+        });
+
+        mLandingFlightsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = BookFlightActivity.getIntent(getApplicationContext());
+                startActivity(intent);
+            }
+        });
+
+        mLandingBookedFlightsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = ManageBookedFlightsActivity.getIntent(getApplicationContext());
+                startActivity(intent);
+            }
+        });
+
+        mLandingAdminButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = AdminMenuActivity.getIntent(getApplicationContext());
                 startActivity(intent);
             }
         });

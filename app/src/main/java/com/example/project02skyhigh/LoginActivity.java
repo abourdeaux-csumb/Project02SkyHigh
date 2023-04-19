@@ -10,10 +10,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
 
-import com.example.project02skyhigh.DB.AppDatabase;
 import com.example.project02skyhigh.DB.UserDAO;
+import com.example.project02skyhigh.DB.UserRepository;
+import com.example.project02skyhigh.databinding.ActivityLoginBinding;
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ Intent factory to switch between activities
     EditText mUsername;
     EditText mPassword;
 
-    Button mLogin;
+    Button mLoginButton;
 
     TextView mInvalidCredentials;
 
@@ -32,28 +32,35 @@ Intent factory to switch between activities
 
     List<User> mUsers;
 
+    ActivityLoginBinding mLoginBinding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        mUsername = findViewById(R.id.loginUsernameEditText);
-        mPassword = findViewById(R.id.loginPasswordEditText);
-        mLogin = findViewById(R.id.loginLoginButton);
-        mInvalidCredentials = findViewById(R.id.loginInvalidCredentials);
-        mUserDAO = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.dbName)
-                .allowMainThreadQueries()
-                .build()
-                .getUserDAO();
-        populateUsers();
-        mUsers = mUserDAO.getUsers();
+        mLoginBinding = ActivityLoginBinding.inflate(getLayoutInflater());
+        View view = mLoginBinding.getRoot();
+        setContentView(view);
+        wireupDisplay();
+        UserRepository.initialize(this);
+    }
 
+    private void wireupDisplay() {
+
+        mUsername = mLoginBinding.loginUsernameEditText;
+        mPassword = mLoginBinding.loginPasswordEditText;
+        mLoginButton = mLoginBinding.loginLoginButton;
+        mInvalidCredentials = mLoginBinding.loginInvalidCredentials;
+        setButtonOnClickListeners();
+    }
+
+    private void setButtonOnClickListeners() {
         /*
-        Navigate to login activity upon clicking the login button
+        Attempt to login with the provided credentials
          */
-        mLogin.setOnClickListener(new View.OnClickListener() {
+        mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int userId = validateCredentials(mUsername.getText().toString(), mPassword.getText().toString());
+                int userId = UserRepository.validateCredentials(mUsername.getText().toString(), mPassword.getText().toString());
                 if (userId != -1) {
                     SharedPreferences sharedPref = getSharedPreferences("Logins", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor =  sharedPref.edit();
@@ -68,35 +75,11 @@ Intent factory to switch between activities
             }
         });
     }
+
+
     public static Intent getIntent(Context context) {
         Intent intent = new Intent(context, LoginActivity.class);
         return intent;
-    }
-
-    private void populateUsers() {
-        List<User> users = mUserDAO.getUsers();
-        if (mUserDAO.getUsers().isEmpty()) {
-            User testUser = new User();
-            testUser.setUsername("testuser1");
-            testUser.setPassword("testuser1");
-            testUser.setIsAdmin(false);
-
-            User adminUser = new User();
-            adminUser.setUsername("admin2");
-            adminUser.setPassword("admin2");
-            adminUser.setIsAdmin(true);
-
-            mUserDAO.insert(testUser, adminUser);
-        }
-    }
-
-    private int validateCredentials(String username, String password) {
-        for (User user : mUsers) {
-            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
-                return user.getUserId();
-            }
-        }
-        return -1;
     }
 
 }
