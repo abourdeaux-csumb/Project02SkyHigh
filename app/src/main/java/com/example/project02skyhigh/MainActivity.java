@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.project02skyhigh.DB.UserRepository;
 import com.example.project02skyhigh.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
@@ -20,22 +21,22 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        SharedPreferences sharedPref = getSharedPreferences("Logins", Context.MODE_PRIVATE);
-        if (sharedPref.getInt("Login", -1) != -1) {
-            Intent intent = LandingPage.getIntent(getApplicationContext());
-            startActivity(intent);
-        }
-
+        UserRepository.initialize(this);
+        redirectIfLoggedIn();
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         mMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = mMainBinding.getRoot();
-
         setContentView(view);
+        wireupDisplay();
+    }
 
+    private void wireupDisplay() {
         mSkyHigh_login_button = mMainBinding.mainLoginButton;
         mSkyHigh_createAccount_button = mMainBinding.mainCreateAccountButton;
+        setButtonOnClickListeners();
+    }
 
+    private void setButtonOnClickListeners() {
         /*
         Navigate to login activity upon clicking the login button
          */
@@ -46,13 +47,32 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        /*
+        Navigate to sign up activity upon clicking the sign up button
+         */
+        mSkyHigh_createAccount_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = SignUpActivity.getIntent(getApplicationContext());
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void redirectIfLoggedIn() {
+        SharedPreferences sharedPref = getSharedPreferences("Logins", Context.MODE_PRIVATE);
+        if (sharedPref.getInt("Login", -1) != -1) {
+            Intent intent = LandingPage.getIntent(getApplicationContext());
+            startActivity(intent);
+        }
     }
 
     /*
     Intent factory to switch between activities
     */
     public static Intent getIntent(Context context) {
-        Intent intent = new Intent(context, MainActivity.class);
+        Intent intent = new Intent(context, LoginActivity.class);
         return intent;
     }
 }
