@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".AdminMenuActivity"
     android:background="@color/mediumBlue">
 
 
     <TextView
-        android:id="@+id/landingSkyHighHeader"
+        android:id="@+id/adminMenuHeader"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_marginStart="16dp"
@@ -17,7 +17,7 @@
         android:layout_marginEnd="16dp"
         android:fadeScrollbars="true"
         android:scrollbars = "vertical"
-        android:text="@string/app_name"
+        android:text="@string/adminMenuHeader"
         app:layout_constraintEnd_toEndOf="parent"
 
         app:layout_constraintTop_toTopOf="parent"
@@ -26,55 +26,41 @@
         android:background="@color/lighterBlue"/>
 
     <Button
-        android:id="@+id/landingFlightsButton"
+        android:id="@+id/adminMenuManageFlightsButton"
         android:layout_width="200dp"
-        android:layout_height="60dp"
+        android:layout_height="80dp"
         android:layout_marginTop="38dp"
         android:gravity="center"
-        android:text="@string/landingFlightsButton"
+        android:text="@string/adminMenuManageFlightsButton"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/landingSkyHighHeader"
+        app:layout_constraintTop_toBottomOf="@+id/adminMenuHeader"
         app:backgroundTint="@color/orange"/>
 
     <Button
-        android:id="@+id/landingBookedFlightsButton"
+        android:id="@+id/adminMenuManageUsersButton"
         android:layout_width="200dp"
-        android:layout_height="60dp"
+        android:layout_height="80dp"
         android:layout_marginTop="18dp"
         android:gravity="center"
-        android:text="@string/landingBookedFlightsButton"
+        android:text="@string/adminMenuManageUsersButton"
         android:textSize="18sp"
         app:backgroundTint="@color/orange"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/landingFlightsButton" />
+        app:layout_constraintTop_toBottomOf="@+id/adminMenuManageFlightsButton" />
 
     <Button
-        android:id="@+id/landingAdminButton"
+        android:id="@+id/adminMenuGoBackButton"
         android:layout_width="200dp"
-        android:layout_height="60dp"
+        android:layout_height="80dp"
         android:layout_marginTop="18dp"
         android:gravity="center"
-        android:text="@string/landingAdminButton"
-        android:textSize="20sp"
-        app:backgroundTint="@color/orange"
-        android:visibility="invisible"
-        tools:visibility="visible"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/landingBookedFlightsButton" />
-    <Button
-        android:id="@+id/landingSignOutButton"
-        android:layout_width="200dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="18dp"
-        android:gravity="center"
-        android:text="@string/landingSignOutButton"
+        android:text="@string/goBackButton"
         android:textSize="20sp"
         app:backgroundTint="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/landingAdminButton" />
+        app:layout_constraintTop_toBottomOf="@+id/adminMenuManageUsersButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>

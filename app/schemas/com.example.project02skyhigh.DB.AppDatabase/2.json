@@ -1,8 +1,8 @@
 {
   "formatVersion": 1,
   "database": {
-    "version": 1,
-    "identityHash": "c4eace31c341acb3a6f6d28cf4043da4",
+    "version": 2,
+    "identityHash": "2fad5a083fe9be0865ba0104e99c7120",
     "entities": [
       {
         "tableName": "user",
@@ -44,7 +44,7 @@
       },
       {
         "tableName": "flight",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`mFLightId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `mOrigin` TEXT, `mDestination` TEXT, `mArrival` INTEGER, `mDeparture` INTEGER)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`mFLightId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `mOrigin` TEXT, `mDestination` TEXT, `mArrival` INTEGER NOT NULL, `mDeparture` INTEGER NOT NULL, `mCreateTime` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "mFLightId",
@@ -68,13 +68,19 @@
             "fieldPath": "mArrival",
             "columnName": "mArrival",
             "affinity": "INTEGER",
-            "notNull": false
+            "notNull": true
           },
           {
             "fieldPath": "mDeparture",
             "columnName": "mDeparture",
             "affinity": "INTEGER",
-            "notNull": false
+            "notNull": true
+          },
+          {
+            "fieldPath": "mCreateTime",
+            "columnName": "mCreateTime",
+            "affinity": "INTEGER",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -88,7 +94,7 @@
       },
       {
         "tableName": "bookings",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`mBookingId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `mFlightId` INTEGER NOT NULL, `mUserId` INTEGER NOT NULL, `CreateTime` INTEGER)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`mBookingId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `mFlightId` INTEGER NOT NULL, `mUserId` INTEGER NOT NULL, `CreateTime` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "mBookingId",
@@ -112,7 +118,7 @@
             "fieldPath": "CreateTime",
             "columnName": "CreateTime",
             "affinity": "INTEGER",
-            "notNull": false
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -128,7 +134,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'c4eace31c341acb3a6f6d28cf4043da4')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '2fad5a083fe9be0865ba0104e99c7120')"
     ]
   }
 }
