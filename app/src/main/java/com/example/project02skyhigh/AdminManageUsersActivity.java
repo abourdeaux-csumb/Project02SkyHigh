@@ -19,12 +19,16 @@ import com.example.project02skyhigh.databinding.ActivityAdminManageUsersBinding;
 import java.util.List;
 
 public class AdminManageUsersActivity extends AppCompatActivity {
-
+    /**
+     * Title: AdminManageUsersActivity.java
+     * Abstract: Activity used for managing users
+     * Author: Aaron Bourdeaux
+     * Date: 2023/04/16
+     */
     ActivityAdminManageUsersBinding mAdminManageUsersBinding;
     Button mDeleteUserButton;
     Button mGoBackButton;
     ListView mAdminManageUsersUserList;
-
     User mSelectedUser;
 
     @Override
@@ -35,6 +39,10 @@ public class AdminManageUsersActivity extends AppCompatActivity {
         setContentView(view);
         wireupDisplay();
     }
+
+    /**
+     * Enable control of various elements in the layout
+     */
     private void wireupDisplay() {
         mAdminManageUsersUserList = mAdminManageUsersBinding.manageUsersUserList;
         mDeleteUserButton = mAdminManageUsersBinding.adminDeleteUserButton;
@@ -43,6 +51,9 @@ public class AdminManageUsersActivity extends AppCompatActivity {
         setOnClickListeners();
     }
 
+    /**
+     * Populates the user list with selectable User elements
+     */
     private void populateUserList() {
         List<User> users = UserRepository.getUsers();
         ArrayAdapter<User> arrayAdapter = new ArrayAdapter<User>(
@@ -52,20 +63,29 @@ public class AdminManageUsersActivity extends AppCompatActivity {
         mAdminManageUsersUserList.setAdapter(arrayAdapter);
     }
 
+    /**
+     * Dictates logic regarding click events
+     */
     private void setOnClickListeners() {
         /*
-        Book a flight
+        Attempts to delete the selected user
          */
         mDeleteUserButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String message;
+                /*
+                Display error if a user hasn't been selected
+                 */
                 if (mDeleteUserButton == null) {
                     message = "Please select a user to delete.";
                 }
                 else {
                     SharedPreferences sharedPref = getSharedPreferences("Logins", Context.MODE_PRIVATE);
                     int userId = sharedPref.getInt("Login", -1);
+                    /*
+                    Display error if user selected is the same as the logged in user
+                     */
                     if (mSelectedUser.getUserId() == userId) {
                         message = "Cannot delete currently logged in user.";
                     }
@@ -79,6 +99,9 @@ public class AdminManageUsersActivity extends AppCompatActivity {
             }
         });
 
+        /*
+        Selects a user upon clicking on the user in the list
+         */
         mAdminManageUsersUserList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -87,6 +110,9 @@ public class AdminManageUsersActivity extends AppCompatActivity {
             }
         });
 
+        /*
+        Go back to previous activity
+         */
         mGoBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

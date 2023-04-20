@@ -13,11 +13,15 @@ import com.example.project02skyhigh.DB.UserRepository;
 import com.example.project02skyhigh.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
-
+    /**
+     * Title: MainActivity.java
+     * Abstract: Activity used as starting point of the app
+     * Author: Aaron Bourdeaux
+     * Date: 2023/04/09
+     */
     Button mSkyHigh_login_button;
     Button mSkyHigh_createAccount_button;
     ActivityMainBinding mMainBinding;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,12 +34,18 @@ public class MainActivity extends AppCompatActivity {
         wireupDisplay();
     }
 
+    /**
+     * Enable control of various elements in the layout
+     */
     private void wireupDisplay() {
         mSkyHigh_login_button = mMainBinding.mainLoginButton;
         mSkyHigh_createAccount_button = mMainBinding.mainCreateAccountButton;
         setButtonOnClickListeners();
     }
 
+    /**
+     * Dictates logic regarding click events
+     */
     private void setButtonOnClickListeners() {
         /*
         Navigate to login activity upon clicking the login button
@@ -60,6 +70,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Redirects to landing page if user is already logged in
+     */
     private void redirectIfLoggedIn() {
         SharedPreferences sharedPref = getSharedPreferences("Logins", Context.MODE_PRIVATE);
         if (sharedPref.getInt("Login", -1) != -1) {

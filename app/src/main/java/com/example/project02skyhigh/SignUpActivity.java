@@ -18,19 +18,19 @@ import com.example.project02skyhigh.databinding.ActivitySignUpBinding;
 import java.util.List;
 
 public class SignUpActivity extends AppCompatActivity {
-
+    /**
+     * Title: SignUpActivity.java
+     * Abstract: Activity used to create a new accounts
+     * Author: Aaron Bourdeaux
+     * Date: 2023/04/14
+     */
     EditText mUsername;
     EditText mPassword;
     EditText mRepeatPassword;
-
     Button mSignUpButton;
-
     TextView mInvalidCredentials;
-
     UserDAO mUserDAO;
-
     List<User> mUsers;
-
     ActivitySignUpBinding mSignUpBinding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +41,9 @@ public class SignUpActivity extends AppCompatActivity {
         wireupDisplay();
     }
 
+    /**
+     * Enable control of various elements in the layout
+     */
     private void wireupDisplay() {
 
         mUsername = mSignUpBinding.signUpUsernameEditText;
@@ -51,6 +54,9 @@ public class SignUpActivity extends AppCompatActivity {
         setButtonOnClickListeners();
     }
 
+    /**
+     * Dictates logic regarding click events
+     */
     private void setButtonOnClickListeners() {
         /*
         Attempt to create an account and sign in
@@ -79,6 +85,9 @@ public class SignUpActivity extends AppCompatActivity {
         });
     }
 
+    /*
+    Sets the validation error text and makes the text visible
+     */
     private void setValidationError(String text) {
         mInvalidCredentials.setText(text);
         mInvalidCredentials.setVisibility(View.VISIBLE);

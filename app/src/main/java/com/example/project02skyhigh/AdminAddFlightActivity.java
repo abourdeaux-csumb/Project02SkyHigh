@@ -17,6 +17,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 public class AdminAddFlightActivity extends AppCompatActivity {
+    /**
+     * Title: AdminAddFlightActivity.java
+     * Abstract: Activity used for adding a flight
+     * Author: Aaron Bourdeaux
+     * Date: 2023/04/18
+     */
 
     ActivityAdminAddFlightBinding mAdminAddFlightBinding;
 
@@ -38,6 +44,9 @@ public class AdminAddFlightActivity extends AppCompatActivity {
         wireupDisplay();
     }
 
+    /**
+     * Enable control of various elements in the layout
+     */
     private void wireupDisplay() {
         mAddFlightOrigin = mAdminAddFlightBinding.addFlightOrigin;
         mAddFlightDestination = mAdminAddFlightBinding.addFlightDestination;
@@ -50,9 +59,12 @@ public class AdminAddFlightActivity extends AppCompatActivity {
         setOnClickListeners();
     }
 
+    /**
+     * Dictates logic regarding click events
+     */
     private void setOnClickListeners() {
         /*
-        Book a flight
+        Adds a flight, displaying success/failure, and redirecting on success
          */
         mAddFlightButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +72,7 @@ public class AdminAddFlightActivity extends AppCompatActivity {
                 Flight flightToAdd = new Flight();
                 flightToAdd.setOrigin(mAddFlightOrigin.getText().toString());
                 flightToAdd.setDestination(mAddFlightDestination.getText().toString());
-                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
                 String departureDateString = mAddFlightDepartureDate.getText().toString() + " " + mAddFlightDepartureTime.getText().toString();
                 String arrivalDateString = mAddFlightArrivalDate.getText().toString() + " " + mAddFlightArrivalTime.getText().toString();
                 try {
@@ -78,6 +90,9 @@ public class AdminAddFlightActivity extends AppCompatActivity {
             }
         });
 
+        /*
+        Go back to previous activity
+         */
         mGoBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

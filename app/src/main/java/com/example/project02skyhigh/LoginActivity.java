@@ -18,20 +18,18 @@ import com.example.project02skyhigh.databinding.ActivityLoginBinding;
 import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
-    /*
-Intent factory to switch between activities
- */
+    /**
+     * Title: LoginActivity.java
+     * Abstract: Activity used for logging in to the app
+     * Author: Aaron Bourdeaux
+     * Date: 2023/04/09
+     */
     EditText mUsername;
     EditText mPassword;
-
     Button mLoginButton;
-
     TextView mInvalidCredentials;
-
     UserDAO mUserDAO;
-
     List<User> mUsers;
-
     ActivityLoginBinding mLoginBinding;
 
     @Override
@@ -44,6 +42,9 @@ Intent factory to switch between activities
         UserRepository.initialize(this);
     }
 
+    /**
+     * Enable control of various elements in the layout
+     */
     private void wireupDisplay() {
 
         mUsername = mLoginBinding.loginUsernameEditText;
@@ -53,6 +54,9 @@ Intent factory to switch between activities
         setButtonOnClickListeners();
     }
 
+    /**
+     * Dictates logic regarding click events
+     */
     private void setButtonOnClickListeners() {
         /*
         Attempt to login with the provided credentials
@@ -69,6 +73,9 @@ Intent factory to switch between activities
                     Intent intent = LandingPage.getIntent(getApplicationContext());
                     startActivity(intent);
                 }
+                /**
+                 * Set visibility of error message if login credentials are invalid
+                 */
                 else {
                     mInvalidCredentials.setVisibility(View.VISIBLE);
                 }
@@ -76,7 +83,9 @@ Intent factory to switch between activities
         });
     }
 
-
+    /*
+    Intent factory to switch between activities
+    */
     public static Intent getIntent(Context context) {
         Intent intent = new Intent(context, LoginActivity.class);
         return intent;

@@ -20,13 +20,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AdminManageFlightsActivity extends AppCompatActivity {
+    /**
+     * Title: AdminManageFlightActivity.java
+     * Abstract: Activity used for managing flights
+     * Author: Aaron Bourdeaux
+     * Date: 2023/04/16
+     */
 
     ActivityAdminManageFlightsBinding mAdminManageFlightsBinding;
     Button mAddFlightButton;
     Button mDeleteFlightButton;
     Button mGoBackButton;
     ListView mAdminManageFlightList;
-
     Flight mSelectedFlight;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +41,10 @@ public class AdminManageFlightsActivity extends AppCompatActivity {
         setContentView(view);
         wireupDisplay();
     }
+
+    /**
+     * Enable control of various elements in the layout
+     */
     private void wireupDisplay() {
         mAdminManageFlightList = mAdminManageFlightsBinding.manageFlightsFlightList;
         mAddFlightButton = mAdminManageFlightsBinding.adminAddFlightButton;
@@ -45,6 +54,9 @@ public class AdminManageFlightsActivity extends AppCompatActivity {
         setOnClickListeners();
     }
 
+    /**
+     * Populates the flight list with selectable Flight elements
+     */
     private void populateFlightList() {
         List<String> flightInfo = new ArrayList<String>();
         List<Flight> flights = FlightRepository.getFlights();
@@ -58,9 +70,12 @@ public class AdminManageFlightsActivity extends AppCompatActivity {
         mAdminManageFlightList.setAdapter(arrayAdapter);
     }
 
+    /**
+     * Dictates logic regarding click events
+     */
     private void setOnClickListeners() {
         /*
-        Book a flight
+        Redirect to Activity for adding a flight
          */
         mAddFlightButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,13 +85,22 @@ public class AdminManageFlightsActivity extends AppCompatActivity {
             }
         });
 
+        /*
+        Attempts to delete a selected flight
+         */
         mDeleteFlightButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String message;
+                /*
+                Display error if no flight has been selected
+                 */
                 if (mSelectedFlight == null) {
                     message = "Please select a flight to delete.";
                 }
+                /*
+                Delete flight and update flight list upon deletion
+                 */
                 else {
                     SharedPreferences sharedPref = getSharedPreferences("Logins", Context.MODE_PRIVATE);
                     int userId = sharedPref.getInt("Login", -1);
@@ -88,15 +112,19 @@ public class AdminManageFlightsActivity extends AppCompatActivity {
             }
         });
 
-
+        /*
+        Selects a flight upon clicking on the flight in the list
+         */
         mAdminManageFlightList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 mSelectedFlight = (Flight)mAdminManageFlightList.getItemAtPosition(i);
-
             }
         });
 
+        /*
+        Go back to previous activity
+         */
         mGoBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

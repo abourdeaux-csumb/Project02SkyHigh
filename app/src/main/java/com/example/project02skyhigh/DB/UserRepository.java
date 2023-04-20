@@ -9,9 +9,18 @@ import com.example.project02skyhigh.User;
 import java.util.List;
 
 public class UserRepository {
-
+    /**
+     * Title: UserRepository.java
+     * Abstract: Abstraction layer to communicate with FlightDAO and BookingsDAO
+     * Author: Aaron Bourdeaux
+     * Date: 2023/04/10
+     */
     private static UserDAO mUserDAO;
 
+    /**
+     * Sets up the logic for communicating with UserRepository
+     * @param context
+     */
     public static void initialize(Context context) {
         mUserDAO = Room.databaseBuilder(context, AppDatabase.class, AppDatabase.dbName)
                 .allowMainThreadQueries()
@@ -20,6 +29,12 @@ public class UserRepository {
         populateUsers();
     }
 
+    /**
+     * Used on login to validate credentials, returns userId
+     * @param username
+     * @param password
+     * @return
+     */
     public static int validateCredentials(String username, String password) {
         List<User> mUsers = mUserDAO.getUsers();
         for (User user : mUsers) {
@@ -30,6 +45,13 @@ public class UserRepository {
         return -1;
     }
 
+    /**
+     * Used to validate creation of new account
+     * @param username
+     * @param password
+     * @param isAdmin
+     * @return
+     */
     public static int createAccount(String username, String password, boolean isAdmin) {
         List<User> mUsers = mUserDAO.getUsers();
         for (User user : mUsers) {
@@ -47,6 +69,9 @@ public class UserRepository {
     }
 
 
+    /**
+     * Seed User table with default values
+     */
     private static void populateUsers() {
         List<User> users = mUserDAO.getUsers();
         if (mUserDAO.getUsers().isEmpty()) {
@@ -64,10 +89,18 @@ public class UserRepository {
         }
     }
 
+    /**
+     * Returns List of all Users
+     * @return
+     */
     public static List<User> getUsers() {
         return mUserDAO.getUsers();
     }
 
+    /**
+     * Delete a user
+     * @param user
+     */
     public static void deleteUser(User user) {
         mUserDAO.delete(user);
     }

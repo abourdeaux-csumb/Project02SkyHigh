@@ -7,7 +7,6 @@
     tools:context=".AdminAddFlightActivity"
     android:background="@color/mediumBlue">
 
-
     <TextView
         android:id="@+id/adminAddFlightHeader"
         android:layout_width="match_parent"
