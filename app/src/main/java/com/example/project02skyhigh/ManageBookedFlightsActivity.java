@@ -20,15 +20,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ManageBookedFlightsActivity extends AppCompatActivity {
-
-
+    /**
+     * Title: ManageBookedFlightsActivity.java
+     * Abstract: Activity used for managing bookings
+     * Author: Aaron Bourdeaux
+     * Date: 2023/04/15
+     */
     ActivityManageBookedFlightsBinding mManageBookedFlightsBinding;
-
     Button mCancelBookedFlightButton;
     Button mGoBackButton;
-
     Flight mFlightToCancel;
-
     ListView mManageBookedFlightsFlightList;
 
     @Override
@@ -39,6 +40,10 @@ public class ManageBookedFlightsActivity extends AppCompatActivity {
         setContentView(view);
         wireupDisplay();
     }
+
+    /**
+     * Enable control of various elements in the layout
+     */
     private void wireupDisplay() {
         mManageBookedFlightsFlightList = mManageBookedFlightsBinding.manageBookedFlightsFlightList;
         mCancelBookedFlightButton = mManageBookedFlightsBinding.cancelBookedFlightButton;
@@ -47,14 +52,20 @@ public class ManageBookedFlightsActivity extends AppCompatActivity {
         setOnClickListeners();
     }
 
+    /**
+     * Dictates logic regarding click events
+     */
     private void setOnClickListeners() {
         /*
-        Book a flight
+        Cancel a booked flight
          */
         mCancelBookedFlightButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String message;
+                /*
+                Display error if no flight is selected
+                 */
                 if (mFlightToCancel == null) {
                     message = "Please select a flight to cancel.";
                 }
@@ -74,6 +85,9 @@ public class ManageBookedFlightsActivity extends AppCompatActivity {
             }
         });
 
+        /*
+        Selects a flight upon clicking on the flight in the list
+         */
         mManageBookedFlightsFlightList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -82,6 +96,9 @@ public class ManageBookedFlightsActivity extends AppCompatActivity {
             }
         });
 
+        /*
+        Go back to previous activity
+         */
         mGoBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,6 +108,9 @@ public class ManageBookedFlightsActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Populates the booking list with selectable Flight/Booking elements
+     */
     private void populateFlightList() {
         SharedPreferences sharedPref = getSharedPreferences("Logins", Context.MODE_PRIVATE);
         int userId = sharedPref.getInt("Login", -1);

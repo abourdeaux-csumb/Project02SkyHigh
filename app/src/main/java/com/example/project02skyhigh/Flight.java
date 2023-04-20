@@ -7,14 +7,15 @@ import com.example.project02skyhigh.DB.AppDatabase;
 
 import java.util.Date;
 
-/**
- *author: Aaron Bourdeaux
- *date: 2023/04/07
- *description: Flight.java is a model used to represent Flight objects
- *             that are stored in the Flight database table
- */
+
 @Entity(tableName = AppDatabase.FLIGHT_TABLE)
 public class Flight {
+    /**
+     *author: Aaron Bourdeaux
+     *date: 2023/04/07
+     *description: Flight.java is a model used to represent Flight objects
+     *             that are stored in the Flight database table
+     */
     @PrimaryKey(autoGenerate = true)
     private int mFLightId;
     private String mOrigin;

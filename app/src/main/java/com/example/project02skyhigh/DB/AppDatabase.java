@@ -12,6 +12,12 @@ import com.example.project02skyhigh.User;
 @Database(entities = {User.class, Flight.class, Booking.class}, version = 1)
 @TypeConverters(DateTypeConverter.class)
 public abstract class AppDatabase extends RoomDatabase {
+    /**
+     * Title: AppDatabase.java
+     * Abstract: Room database wrapper class for SQLlite db
+     * Author: Aaron Bourdeaux
+     * Date: 2023/04/03
+     */
     public static final String dbName = "db-SkyHigh";
     public static final String USER_TABLE = "user";
 

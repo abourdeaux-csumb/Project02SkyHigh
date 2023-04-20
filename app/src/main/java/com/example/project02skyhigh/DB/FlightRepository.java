@@ -11,11 +11,20 @@ import java.util.Date;
 import java.util.List;
 
 public class FlightRepository {
-
+    /**
+     * Title: FlightRepository.java
+     * Abstract: Abstraction layer to communicate with FlightDAO and BookingsDAO
+     * Author: Aaron Bourdeaux
+     * Date: 2023/04/10
+     */
     private static FlightDAO mFlightDAO;
     private static BookingsDAO mBookingsDAO;
     private int userId;
 
+    /**
+     * Sets up the logic for communicating with FlightRepository
+     * @param context
+     */
     public static void initialize(Context context) {
         mFlightDAO = Room.databaseBuilder(context, AppDatabase.class, AppDatabase.dbName)
                 .allowMainThreadQueries()
@@ -28,14 +37,27 @@ public class FlightRepository {
         populateFlights();
     }
 
+    /**
+     * Returns all flights
+     * @return
+     */
     public static List<Flight> getFlights() {
         return mFlightDAO.getFlights();
     }
 
+    /**
+     * Returns all flights that have been booked
+     * by a particular user
+     * @param userId
+     * @return
+     */
     public static List<Flight> getFlightsByUserId(int userId) {
         return mBookingsDAO.getFlightBookingsByUser(userId);
     }
 
+    /**
+     * Seeds Flight table with flights if Flight table is empty
+     */
     private static void populateFlights() {
         List<Flight> flights = mFlightDAO.getFlights();
         if (flights.isEmpty()) {
@@ -62,6 +84,12 @@ public class FlightRepository {
         }
     }
 
+    /**
+     * Adds a booking record for a particular flight and user
+     * @param flightId
+     * @param userId
+     * @return
+     */
     public static int bookFlight(int flightId, int userId) {
         List<Flight> bookings = mBookingsDAO.getFlightBookingsByUser(userId);
         for (Flight flight : bookings) {
@@ -88,6 +116,10 @@ public class FlightRepository {
         return -1;
     }
 
+    /**
+     * Deletes a flight and all bookings associated with this flight
+     * @param flightId
+     */
     public static void deleteFlight(int flightId) {
         List<Booking> bookings = mBookingsDAO.getBookings();
         for (Booking booking : bookings) {
@@ -99,6 +131,10 @@ public class FlightRepository {
         mFlightDAO.delete(flightToDelete);
     }
 
+    /**
+     * Adds a flight to the Flight table
+     * @param flight
+     */
     public static void addFlight(Flight flight) {
         mFlightDAO.insert(flight);
     }

@@ -11,11 +11,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.project02skyhigh.databinding.ActivityAdminMenuBinding;
 
 public class AdminMenuActivity extends AppCompatActivity {
-
+    /**
+     * Title: AdminMenuActivityActivity.java
+     * Abstract: Activity used as a menu for redirecting to admin-specific activities
+     * Author: Aaron Bourdeaux
+     * Date: 2023/04/12
+     */
     Button mAdminMenuManageFlightsButton;
     Button mAdminMenuManageUsersButton;
     Button mAdminMenuManageGoBackButton;
-
     ActivityAdminMenuBinding mAdminMenuBinding;
 
     @Override
@@ -27,6 +31,9 @@ public class AdminMenuActivity extends AppCompatActivity {
         wireUpDisplay();
     }
 
+    /**
+     * Enable control of various elements in the layout
+     */
     private void wireUpDisplay() {
         mAdminMenuManageFlightsButton = mAdminMenuBinding.adminMenuManageFlightsButton;
         mAdminMenuManageUsersButton = mAdminMenuBinding.adminMenuManageUsersButton;
@@ -34,7 +41,13 @@ public class AdminMenuActivity extends AppCompatActivity {
         setButtonOnClickListeners();
     }
 
+    /**
+     * Dictates logic regarding click events
+     */
     private void setButtonOnClickListeners() {
+        /*
+        Redirect to AdminManageFlightsActivity
+         */
         mAdminMenuManageFlightsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -43,6 +56,9 @@ public class AdminMenuActivity extends AppCompatActivity {
             }
         });
 
+        /*
+        Redirect to AdminManageUsersActivity
+         */
         mAdminMenuManageUsersButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -51,6 +67,9 @@ public class AdminMenuActivity extends AppCompatActivity {
             }
         });
 
+        /*
+        Go back to previous activity
+         */
         mAdminMenuManageGoBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

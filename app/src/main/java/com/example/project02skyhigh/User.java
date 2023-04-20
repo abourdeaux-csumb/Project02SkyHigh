@@ -4,14 +4,15 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import com.example.project02skyhigh.DB.AppDatabase;
-/**
- *author: Aaron Bourdeaux
- *date: 2023/04/07
- *description: User.java is a model used to represent User objects
- *             that are stored in the User database table
- */
+
 @Entity(tableName = AppDatabase.USER_TABLE)
 public class User {
+    /**
+     *author: Aaron Bourdeaux
+     *date: 2023/04/07
+     *description: User.java is a model used to represent User objects
+     *             that are stored in the User database table
+     */
     @PrimaryKey(autoGenerate = true)
     private int mUserId;
     private String mUsername;
